@@ -140,11 +140,20 @@
                                                         <td><i><a href="#" >register/Dispatcher.php</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
-                                                        <td>Đây là file đăng ký file xử lý điều phối của plugin khi có yêu cầu xử lý tới plugin. Chi tiết mục #4
+                                                        <td>Đây là file đăng ký file xử lý điều phối của plugin khi có yêu cầu xử lý tới plugin. Chi tiết mục #3
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>5
+                                                        </td>
+                                                        <td><i><a href="#" >register/Bootstrap.php</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Đây là file được load khi plugin được load vào hệ thống. chi tiết mục #3
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>6
                                                         </td>
                                                         <td><i><a href="#" >register/Routing.php</a></i>
                                                         </td>
@@ -153,7 +162,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>6
+                                                        <td>7
                                                         </td>
                                                         <td><i><a href="#" >controllers</a></i>
                                                         </td>
@@ -162,7 +171,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>7
+                                                        <td>8
                                                         </td>
                                                         <td><i><a href="#" >models</a></i>
                                                         </td>
@@ -171,7 +180,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>8
+                                                        <td>9
                                                         </td>
                                                         <td><i><a href="#" >entities</a></i>
                                                         </td>
@@ -180,7 +189,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>9
+                                                        <td>10
                                                         </td>
                                                         <td><i><a href="#" >viewmodels</a></i>
                                                         </td>
@@ -189,7 +198,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>10
+                                                        <td>11
                                                         </td>
                                                         <td><i><a href="#" >views</a></i>
                                                         </td>
@@ -205,7 +214,7 @@
                                         <h4>2. Install / Uninstall plugin</h4>
                                         <div class="content-section px-4">
                                             <div class="sup-content-section">
-                                                <p>Để cài đặt được plugin cần đảm bảo đúng các quy định đăng ký của Plugin:</p>
+                                                <p>Để cài đặt được plugin cần tối thiếu 2 file là plugin.php và register/Installer.php:</p>
                                                 <strong>File plugin.php example</strong>
                                                 <pre>&lt;?php
     return [
@@ -307,24 +316,169 @@
                                     </div>
                                     <div id="section-3" class="col-12">
                                         <h4>3. Register</h4>
+                                        <div class="content-section px-4">
+                                            <strong>File register/Routing.php</strong>
+                                            <p>Đây là file đăng ký các Endpoint của plugin. Example:</p>
+<pre>&lt;?php
+
+namespace App\solutionA\pluginB\registers;
+
+use SPT\Application\IApp;
+
+class Routing
+{
+    public static function registerEndpoints()
+    {
+        return [
+            'endpont1' =&gt; [
+                'fnc' =&gt; [
+                    'get' =&gt; 'pluginB.controller_name.funcA',
+                    'post' =&gt; 'pluginB.controller_name.funcB',
+                ]
+            ],
+            'endpont2' =&gt; [
+                'fnc' =&gt; [
+                    'get' =&gt; 'pluginB.controller_name.funcC',
+                    'post' =&gt; 'pluginB.controller_name.funcD',
+                ],
+                'parameters' =&gt; ['id'],
+            ],
+        ];
+    }
+}
+</pre>
+<p>Ví dụ trên đăng ký tương ứng với 2 endpoint: endpoint1 và endpoint2/{id}</p>
+<p>Trong đó:</p>
+<ul>
+    <li>fnc: nơi quy định các function controller tương ứng với các method get, post, put, delete</li>
+    <li>parameters: tương ứng các parameter trên url trên endpoint. Ví dụ /endpoint2/3 sẽ có param id bằng 3</li>
+</ul>
+<strong>File register/Dispatcher.php</strong>
+<p>Đây là file điều hướng khi endpoint của plugin được kích hoạt. File này thường được sử dụng khi cần xây dựng plugin xử lý tác vụ trên web thông qua các endpoint.</p>
+<pre>&lt;?php
+namespace App\solutionA\pluginB\registers;
+
+use SPT\Application\IApp;
+use SPT\Response;
+
+class Dispatcher
+{
+    public static function dispatch(IApp $app)
+    {   
+        // Check Permission
+        $app-&gt;plgLoad('permission', 'CheckSession');
+
+        $cName = $app-&gt;get('controller');
+        $fName = $app-&gt;get('function');
+
+        $app-&gt;set('theme', $app-&gt;cf('adminTheme'));
+
+        $controller = 'App\solutionA\pluginB\controllers\'. $cName;
+        if(!class_exists($controller))
+        {
+            $app-&gt;raiseError('Invalid controller '. $cName);
+        }
+
+        $controller = new $controller($app-&gt;getContainer());
+        $controller-&gt;{$fName}();
+        
+        
+
+        $fName = 'to'. ucfirst($app-&gt;get('format', 'html'));
+
+        $app-&gt;finalize(
+            $controller-&gt;{$fName}()
+        );
+    }
+}
+</pre>
+<p>File này có nhiệm vụ kiểm tra controller và function đã được đăng ký trong Routing và thực hiện gọi function đó ra. Đây cũng là nơi có thể tạo thêm các hook hoặc check permission khi các endpoint được gọi. Ví dụ như dòng "$app->PlgLoad('perrmison', 'checkSession');" nó có nhiệm vụ kiểm tra permission user được lưu trên session.</p>
+Ví dụ của 1 việc load 1 hook
+<pre>$app-&gt;plgLoad('permission', 'CheckSession');</pre>
+<p>Câu lệnh này sẽ gọi đến tất cả các function register/Permission::checkSession() trên toàn bộ plugin. Ta có thể mở rộng với việc tạo thêm các hook khác trong register và gọi chúng trên register/Dispatcher</p>
+<strong>File register/Bootstrap.php</strong>
+<p>Đây là file được chạy để nạp thêm các đối tượng vào hệ thống. Được chạy khi plugin load vào hệ thống.</p>
+<pre>&lt;?php
+    namespace App\solutionA\pluginB\registers;
+    
+    use SPT\Application\IApp;
+    use SPT\File;
+    
+    class Bootstrap
+    {
+        public static function initialize( IApp $app)
+        {
+            $container = $app-&gt;getContainer();
+            if (!$container-&gt;exists('file')) 
+            {
+                $container-&gt;set('file', new File());
+            }
+        }
+    }
+    </pre>
+<p>Ví dụ trên thực hiện việc thêm đối tượng "file" vào hệ thống, dùng để xử lý các bài toán liên quan đến file / folder.</p>
+                                        </div>
                                     </div>
                                     <div id="section-4" class="col-12">
-                                        <h4>4. Dispatcher</h4>
+                                        <h4>4. Controller</h4>
+                                        <div class="content-section px-4">
+                                            <p>Đây là các class xử lý các action khi các endpoint plugin được kích hoạt. Example class controller</p>
+<pre>&lt;?php
+    namespace App\solutionA\pluginB\controllers;
+    
+    use SPT\Response;
+    use SPT\Web\ControllerMVVM;
+    
+    class example extends ControllerMVVM
+    {
+        public function view()
+        {
+            $this-&gt;app-&gt;set('layout', 'form');
+            $this-&gt;app-&gt;set('page', 'two-column');
+            $this-&gt;app-&gt;set('format', 'html');
+            return ;
+        }
+    }
+    </pre>
+<p>Trên là 1 ví dụ việc tạo 1 class controller.</p>
+<strong>Hiển thị giao diện với controller: </strong>
+<p>Để hiển thị được giao diện cần set layout và page</p>
+<pre>
+    $this-&gt;app-&gt;set('layout', 'form');
+    $this-&gt;app-&gt;set('page', 'two-column');
+    $this-&gt;app-&gt;set('format', 'html');
+</pre>
+<p>Trong đó, layout tương ứng với file trong folder views. Tương ứng với ví dụ, layout sẽ hiển thị tương ứng file views/layouts/form.php</p>
+<p>Page tương ứng với page của theme, mặc định page là index</p>
+<p>Format quy định định dạng của content, trong ví dụ thì là html. Có các dạng format sau: html, json</p>
+<strong>Lấy các data từ request:</strong>
+<pre>
+    $this-&gt;request-&gt;{method_type}&gt;get('field_name', 'default_value','type_value');
+</pre>
+
+<p>Trong đó, {method_type} là kiểu của request, ví dụ {method_type} = post sẽ lấy request từ $_POST. Có các dạng method support: post, get, file, server. {type_value} định dạng kiểu của giá trị trả ra, có các kiểu: string, array, int</p>
+<strong>Redirect trong controller:</strong>
+<p>Example redirect tới 1 link trong controller</p>
+<pre>
+    $this-&gt;app-&gt;redirect('link');
+</pre>
+
+                                        </div>
                                     </div>
                                     <div id="section-5" class="col-12">
-                                        <h4>5. Controller</h4>
+                                        <h4>5. Model</h4>
+                                        <div class="content-section">
+                                            
+                                        </div>
                                     </div>
                                     <div id="section-6" class="col-12">
-                                        <h4>6. Model</h4>
+                                        <h4>6. Entity</h4>
                                     </div>
                                     <div id="section-7" class="col-12">
-                                        <h4>7. Entity</h4>
+                                        <h4>7. Viewmodel</h4>
                                     </div>
                                     <div id="section-8" class="col-12">
-                                        <h4>8. Viewmodel</h4>
-                                    </div>
-                                    <div id="section-9" class="col-12">
-                                        <h4>9. View</h4>
+                                        <h4>8. View</h4>
                                     </div>
                                 </div>
                             </div>
