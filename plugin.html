@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document for developer</title>
+    <link rel="stylesheet" type="text/css" href="./assets/font/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/css/theme.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/plugins/simplelightbox/simple-lightbox.min.css">
+    <script src="./assets/js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
+    <div class="wrapper">
+        <div class="main">
+            <main class="content p-0">
+                <div class="docs-page pt-0">
+                    <div class="docs-wrapper">
+                        <div id="docs-sidebar" class="docs-sidebar no-top">
+                            <nav id="docs-nav" class="docs-nav navbar">
+                                <ul class="section-items list-unstyled nav flex-column pb-3">
+                                    <li class="nav-item section-title">
+                                        <a class="nav-link active" href="./index.html">
+                                            <span class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i>
+                                            </span>Tài liệu cho phát triển
+                                        </a>
+                                    </li>
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./plugin.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Plugin</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-1">
+                                            1.Cấu trúc </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-2">
+                                            2. Install / Uninstall plugin</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-3">
+                                            3. Register</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-4">
+                                            4. Dispatcher</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-5">
+                                            5. Controller</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-6">
+                                            6. Model</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-7">
+                                            7. Entity</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-8">
+                                            8. Viewmodels</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-9">
+                                            9. Views</a>
+                                    </li>
+
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./solution.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Solution</a>
+                                    </li>
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./theme.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Theme</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="docs-content">
+                            <div class="container">
+                                <article class="docs-article pb-0" id="section-1">
+                                    <header class="docs-header">
+                                        <h2 class=" text-center mb-0">
+                                            Phát triển Plugin
+                                        </h2>
+                                    </header>
+                                </article>
+                            </div>
+                            <div class="container mt-3">
+                                <div class="row">
+                                    <div id="section-1" class="col-12">
+                                        <h4>1. Cấu trúc</h4>
+                                        <div class="content-section px-4">
+                                            <p>Cấu trúc folder của một plugin bao gồm:
+                                            </p>
+                                            <table class="table" border="1">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1
+                                                        </td>
+                                                        <td><i><a href="#" >plugin.php</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Đây là file php khai báo thông tin của plugin, sử dụng cho việc cài đặt và quản lý plugin
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2
+                                                        </td>
+                                                        <td><i><a href="#" >register</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Đây là folder chứa các đăng ký của plugin với hệ thống
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3
+                                                        </td>
+                                                        <td><i><a href="#" >register/Installer.php</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Đây là file đăng ký thông tin của plugin, nơi plugin trigger các sự kiện khi install / uninstall plugin.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4
+                                                        </td>
+                                                        <td><i><a href="#" >register/Dispatcher.php</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Đây là file đăng ký file xử lý điều phối của plugin khi có yêu cầu xử lý tới plugin. Chi tiết mục #4
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5
+                                                        </td>
+                                                        <td><i><a href="#" >register/Routing.php</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Đây là file đăng ký các endpoint của plugin. chi tiết mục #3
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>6
+                                                        </td>
+                                                        <td><i><a href="#" >controllers</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các class controller xử lý các request trên plugin.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>7
+                                                        </td>
+                                                        <td><i><a href="#" >models</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các class models xử lý nghiệp vụ của plugin
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>8
+                                                        </td>
+                                                        <td><i><a href="#" >entities</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các class Entity kết nối với cơ sở dữ liệu
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>9
+                                                        </td>
+                                                        <td><i><a href="#" >viewmodels</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các class ViewModels là nơi định nghĩa dữ liệu được hiển thị trên giao diện 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>10
+                                                        </td>
+                                                        <td><i><a href="#" >views</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các giao diện của plugin
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="section-2" class="col-12">
+                                        <h4>2. Install / Uninstall plugin</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Để cài đặt được plugin cần đảm bảo đúng các quy định đăng ký của Plugin:</p>
+                                                <strong>File plugin.php example</strong>
+                                                <pre>&lt;?php
+    return [
+        'tags' =&gt; [],
+        'type' =&gt; 'plugin',
+        'solution' =&gt; 'new_solution',
+        'folder_name' =&gt; 'new_plugin',
+        'name' =&gt; 'New Plugin',
+        'dependencies' =&gt; []
+    ];</pre>
+    <p>Trong đó:</p>
+    <p>- tags: Các thẻ của plugin</p>
+    <p>- type: plugin, thông tin này không thay đổi</p>
+    <p>- solution: new_solution, thông tin bắt buộc, mỗi plugin sẽ luôn này trong một solution</p>
+    <p>- folder_name: là tên folder của plugin</p>
+    <p>- name: tên plugin</p>
+    <p>- dependencies: Chứa thông tin danh sách các plugin hoặc solution cần cài đặt trước khi cài đặt plugin. Ví dụ plugin phụ thuộc </p>
+    <pre>'dependencies' =&gt; [
+        'solutionA',
+        'solutionB/pluginC'
+    ]</pre>
+    
+    <strong>Class register/Installer.php: </strong>
+    <pre>&lt;?php
+    namespace App\solutionA\pluginB\registers;
+    
+    use SPT\Application\IApp;
+    
+    class Installer
+    {
+        public static function info()
+        {
+            return [
+                'tags' =&gt; [],
+                'type' =&gt; 'plugin',
+                'solution' =&gt; 'solutionA',
+                'folder_name' =&gt; 'pluginB',
+                'name' =&gt; 'Plugin B',
+                'dependencies' =&gt; []
+            ];
+        }
+        
+        public static function name()
+        {
+            return 'Plugin B';
+        }
+    
+        public static function version()
+        {
+            return '0.0.1';
+        }
+    
+        public static function assets()
+        {
+            return [
+                'plugin_assets' =&gt; 'assets/plugin_assets',
+            ];
+        }
+    
+        public static function install( IApp )
+        {
+            // Run sth to install
+            return true;
+        }
+        public static function uninstall( IApp )
+        {
+            // Run sth to uninstall
+            return true;
+        }
+        public static function active( IApp )
+        {
+            // run sth to prepare the install
+        }
+        public static function deactive( IApp )
+        {
+            // run sth to uninstall
+        }
+    }</pre>
+    <strong>Các lưu ý khi tạo installer plugin:</strong>
+    <ul>
+        <li>
+            Cách đặt namespace: namespace có cấu trúc App\{solution}\{plugin}\register. trong đó, {solution} là name folder của solution chứa plugin, {plugin} name folder của plugin.
+            Quy tắc đặt namespace này cũng sẽ áp dụng với tất cả class của plugin.
+        </li>
+        <li>
+            function info() chứa thông tin của plugin
+        </li>
+        <li>
+            function assets() chứa thông tin danh sách các file assets của plugin. Trong đó: "plugin_assets" là tên folder chứa các file asset của plugin và cũng là nơi lưu trữ trên folder asset của hệt thống.
+            Việc này khá quan trọng khi muốn thêm các file style / js dùng cho giao diện plugin.
+        </li>
+        <li>
+            2 function install() và uninstall() là nơi thực hiện thêm các công việc khi install/uninstall plugin
+        </li>
+    </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="section-3" class="col-12">
+                                        <h4>3. Register</h4>
+                                    </div>
+                                    <div id="section-4" class="col-12">
+                                        <h4>4. Dispatcher</h4>
+                                    </div>
+                                    <div id="section-5" class="col-12">
+                                        <h4>5. Controller</h4>
+                                    </div>
+                                    <div id="section-6" class="col-12">
+                                        <h4>6. Model</h4>
+                                    </div>
+                                    <div id="section-7" class="col-12">
+                                        <h4>7. Entity</h4>
+                                    </div>
+                                    <div id="section-8" class="col-12">
+                                        <h4>8. Viewmodel</h4>
+                                    </div>
+                                    <div id="section-9" class="col-12">
+                                        <h4>9. View</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="./assets/specs/plugins/popper.min.js"></script>
+    <script src="./assets/specs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/specs/plugins/smoothscroll.min.js"></script>
+    <script src="./assets/specs/plugins/simplelightbox/simple-lightbox.min.js"></script>
+    <script src="./assets/specs/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+    <script src="./assets/specs/js/docs.js"></script>
+</body>
+
+</html>
