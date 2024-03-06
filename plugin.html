@@ -467,12 +467,34 @@ Ví dụ của 1 việc load 1 hook
                                     </div>
                                     <div id="section-5" class="col-12">
                                         <h4>5. Model</h4>
-                                        <div class="content-section">
-                                            
+                                        <div class="content-section px-4">
+                                            <p>Class model là nơi xử lý các bài toán nghiệp vụ, logic của plugin. Example class:</p>
+<pre>&lt;?php
+
+namespace App\solutionA\pluginB\models;
+
+use SPT\Container\Client as Base;
+
+class ExampleModel extends Base
+{ 
+    // Write your code here
+    use \SPT\Traits\ErrorString;
+
+}
+</pre>
+<p>Ví dụ trên là example của một class Model. Để xử dụng được model sử dụng câu lệnh:</p>
+<pre>
+    $this-&gt;{Model}-&gt;func();
+</pre>
+<p>Trong đó {Model} là tên class Model.</p>
                                         </div>
                                     </div>
                                     <div id="section-6" class="col-12">
                                         <h4>6. Entity</h4>
+                                        <div class="content-section px-4">
+                                            <p>Class Entity dùng để connect với 1 table trên cơ sở dữ liệu và xử lý dữ liệu trên table. Example Class: </p>
+                                            <pre></pre>
+                                        </div>
                                     </div>
                                     <div id="section-7" class="col-12">
                                         <h4>7. Viewmodel</h4>
