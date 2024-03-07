@@ -56,6 +56,18 @@
                                         <a class="nav-link scrollto" href="#section-2">
                                             2. Install / Uninstall</a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-3">
+                                            3. Register Assets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-4">
+                                            4. Page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-5">
+                                            5. Override view</a>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -140,6 +152,92 @@
     <p>Việc Install / Uninstall solution sẽ dựa trên thông tin của file theme.json để thực hiện.</p>
         <strong>File index.php </strong>
         <p>Đây là file page mặc định của theme, page được xác định bằng $this->app->set('page', 'page_name')</p>
+                                    </div>
+                                    <div id="section-3" class="col-12">
+                                        <h4>3. Register Assets</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Để đăng ký các file asset trong theme sử dụng file _asset.php.</p>
+                                                <strong>File _assets.php example</strong>
+<pre>&lt;?php defined( 'APP_PATH' ) or die('');
+
+    return [
+        'new_theme-css' =&gt; [
+            ['__domain__/assets/new_theme/css/style.css', '' , 'new_theme_style']
+        ],
+    
+    ];</pre>
+    <p>Trong đó:</p>
+    <p>- key của mảng: Đây là key asset file</p>
+    <p>- value của mảng: Mảng chứa thông tin của file asset lần lượt bao gồm: link tới file asset, depenendcies của file asset, unique name của file asset(để tránh trường hợp file bị render nhiều lần)</p>
+    <p>- __domain__: đây là shortcode để tượng trưng cho site url</p>
+                                    </div>
+                                    <div id="section-4" class="col-12">
+                                        <h4>4. Page</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Các file .php trong theme sẽ tương ứng với các page. Page mặc định tương ứng với file.</p>
+                                                <strong>File page.php example</strong>
+<pre>&lt;?php defined('APP_PATH') or die('');
+    $this-&gt;theme-&gt;prepareAssets([
+        'new_theme',
+    ]);
+    $content = $this-&gt;render($this-&gt;mainLayout);
+    ?&gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang='en'&gt;
+    
+    &lt;head&gt;
+        &lt;meta charset='utf-8'&gt;
+        &lt;meta name='viewport' content='width=device-width, initial-scale=1'&gt;
+        &lt;title&gt;Title Page&lt;/title&gt;
+    
+        &lt;?php $this-&gt;theme-&gt;echo('css', $this-&gt;url()) ?&gt;
+        &lt;?php $this-&gt;theme-&gt;echo('topJs', $this-&gt;url()) ?&gt;
+        &lt;?php $this-&gt;theme-&gt;echo('inlineCss', $this-&gt;url()) ?&gt;
+    &lt;/head&gt;
+    
+    &lt;body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default"&gt;
+        &lt;?php echo $this-&gt;renderWidget('core::backend.header'); ?&gt;
+        &lt;div class="wrapper"&gt;
+            &lt;div class="main"&gt;
+                &lt;main class="content p-0"&gt;
+                    &lt;?php echo $content; ?&gt;
+                &lt;/main&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;?php $this-&gt;theme-&gt;echo('js', $this-&gt;url()) ?&gt;
+        &lt;?php $this-&gt;theme-&gt;echo('inlineJs', $this-&gt;url()) ?&gt;
+    &lt;/body&gt;
+    
+    &lt;/html&gt;</pre>
+    <p>Các file page sẽ quy định cấu trúc của page, và style của page. Trong đó: </p>
+    <ul>
+        <li>$this->render(): Dùng để render view</li>
+        <li>$this->renderWidget(): Dùng để render widget</li>
+        <li>$this->mainLayout: chứa thông tin của layout chính</li>
+        <li>$this->url(): url của site</li>
+        <li>$this->theme->echo({key}, {link}): function dùng hiển thị ra các file asset, với {key} bao gồm css, js, inlineCss, topJs, inlineJs </li>
+    </ul>
+                                    </div>
+                                    <div id="section-5" class="col-12">
+                                        <h4>5. Override view</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Để override các view của plugin thì trong theme sẽ tạo các file view tương ứng</p>
+                                                <p>Quy tắc tạo file override: </p>
+                                                <ul>
+                                                    <li>Các file override được tạo trong 2 folder _layouts và _widgets</li>
+                                                    <li>_layouts folder chứa các file override của layout plugin</li>
+                                                    <li>_widgets folder chứa các file override của widget plugin</li>
+                                                    <li>Ví dụ view của plugin a: pluginA/views/layouts/frontend/layout1.php, để override cần tạo 1 file trong theme: new_theme/_layouts/pluginA/frontend/layout1.php
+                                                        các file widget cũng tương tự như layout.
+                                                    </li>
+                                                    <li>Các dữ liệu sử dụng được trên layout của plugin cũng sử dụng được trên layout của theme
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
