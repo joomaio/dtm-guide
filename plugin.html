@@ -492,8 +492,95 @@ class ExampleModel extends Base
                                     <div id="section-6" class="col-12">
                                         <h4>6. Entity</h4>
                                         <div class="content-section px-4">
-                                            <p>Class Entity dùng để connect với 1 table trên cơ sở dữ liệu và xử lý dữ liệu trên table. Example Class: </p>
-                                            <pre></pre>
+                                            <p>Class Entity dùng để xử lý kết nối với cơ sở dữ liệu của hệ thống. Example Class: </p>
+<pre>&lt;?php
+namespace App\solutionA\pluginB\entities;
+
+use SPT\Storage\DB\Entity;
+
+class ExampleEntity extends Entity
+{
+    protected $table = '#__example';
+    protected $pk = 'id';
+
+    public function getFields()
+    {
+        return [
+                'id' =&gt; [
+                    'type' =&gt; 'int',
+                    'pk' =&gt; 1,
+                    'option' =&gt; 'unsigned',
+                    'extra' =&gt; 'auto_increment',
+                ],
+                'new_field' =&gt; [
+                    'type' =&gt; 'int',
+                ],
+        ];
+    }
+}</pre>
+
+<p>Các class Entity được extends từ class "SPT\Storage\DB\Entity". Nó có thể sử dụng được trong các class Model, Controller và ViewModel. Trong đó:</p>
+<ul>
+    <li>
+        $table: là tên bảng trong cơ sở dữ liệu
+    </li>
+    <li>
+        $pk: là tên trường khóa chính trong bảng
+    </li>
+    <li>
+        getFields(): trả ra danh sách các trường trong bảng, với định dạng 1 array với key tương ứng với tên trường,
+        'type' là kiểu của trường, 'pk' là khóa chính, = 1 nếu nó là khóa chính.
+    </li>
+</ul>
+<strong># Câu lệnh select</strong>
+<pre>
+    $this-&gt;ExampleEntity-&gt;list( $start, $limit, $where, $sort, $select);
+</pre>
+<p>Trong đó:</p>
+<ul>
+    <li>$start: vị trí bắt đầu, có kiểu int</li>
+    <li>$limit: giới hạn số lượng, có kiểu int, nếu $limit = 0 câu lệnh select sẽ lấy tất cả các record</li>
+    <li>$where: các điều kiện của select. Có dạng 1 array, example: 
+<pre>
+    $where = ['id' =&gt; 1];
+</pre>
+tương ứng với điều kiện id = 1
+    </li>
+    <li>$sort: sắp xếp</li>
+    <li>$select: các trường được select</li>
+</ul>
+<p>Để lấy được lượng tất cả record theo điều kiện $where, ta sử dụng câu lệnh này ngay sau câu lệnh list: </p>
+<pre>
+    $this-&gt;ExampleEntity-&gt;getListTotal();
+</pre>
+<p>Câu lệnh sẽ lấy tổng số record của câu lệnh list() trước đó.</p>
+<strong># Tìm 1 record theo primary key</strong>
+<pre>
+    $find =  $this-&gt;ExampleEntity-&gt;findByPK(3);</pre>
+<p>Câu lệnh này sẽ tìm kiếm record có giá trị primary key = 3, trả ra false nếu không tồn tại</p>
+<strong># Tìm 1 record theo điều kiện</strong>
+<pre>
+    $find =  $this-&gt;ExampleEntity-&gt;findOne(['id' => 1]);</pre>
+<p>Câu lệnh này sẽ tìm kiếm record có id  = 1, trả ra false nếu không tồn tại</p>
+<strong># Thêm mới</strong>
+<pre>
+    $newId =  $this-&gt;ExampleEntity-&gt;add([
+        'title' =&gt; 'test',
+        'description' =&gt; 'This is test'
+    ]);</pre>
+<p>Hàm add() trả ra giá trị của primary_key vừa tạo nếu thành công, trả ra false nếu thất bại</p>
+<strong># Cập nhật</strong>
+<pre>
+    $try =  $this-&gt;ExampleEntity-&gt;update([
+        'id' =&gt; 3,
+        'title' =&gt; 'test',
+        'description' =&gt; 'This is test'
+    ]);</pre>
+<p>Hàm update() trả ra giá trị true nếu thành công và false nếu thất bại. Khi sử dụng hàm update, mảng truyền vào bắt buộc phải chứa trường primary key để xác định recored cần update</p>
+<strong># Xóa</strong>
+<pre>
+    $try =  $this-&gt;ExampleEntity-&gt;remove(3);</pre>
+<p>Hàm remove() trả ra giá trị true nếu thành công và false nếu thất bại. giá trị truyền vào là id của record</p>
                                         </div>
                                     </div>
                                     <div id="section-7" class="col-12">
