@@ -110,7 +110,7 @@
                                                     <tr>
                                                         <td>1
                                                         </td>
-                                                        <td><i><a href="#" >plugin.php</a></i>
+                                                        <td><i><a href="#file_plugin" >plugin.php</a></i>
                                                         </td>
                                                         <td>Bắt buộc</td>
                                                         <td>Đây là file php khai báo thông tin của plugin, sử dụng cho việc cài đặt và quản lý plugin
@@ -119,7 +119,7 @@
                                                     <tr>
                                                         <td>2
                                                         </td>
-                                                        <td><i><a href="#" >register</a></i>
+                                                        <td><i><a href="#section-3" >register</a></i>
                                                         </td>
                                                         <td>Bắt buộc</td>
                                                         <td>Đây là folder chứa các đăng ký của plugin với hệ thống
@@ -128,7 +128,7 @@
                                                     <tr>
                                                         <td>3
                                                         </td>
-                                                        <td><i><a href="#" >register/Installer.php</a></i>
+                                                        <td><i><a href="#register-install" >register/Installer.php</a></i>
                                                         </td>
                                                         <td>Bắt buộc</td>
                                                         <td>Đây là file đăng ký thông tin của plugin, nơi plugin trigger các sự kiện khi install / uninstall plugin.
@@ -137,7 +137,7 @@
                                                     <tr>
                                                         <td>4
                                                         </td>
-                                                        <td><i><a href="#" >register/Dispatcher.php</a></i>
+                                                        <td><i><a href="#register-dispatcher" >register/Dispatcher.php</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
                                                         <td>Đây là file đăng ký file xử lý điều phối của plugin khi có yêu cầu xử lý tới plugin. Chi tiết mục #3
@@ -146,7 +146,7 @@
                                                     <tr>
                                                         <td>5
                                                         </td>
-                                                        <td><i><a href="#" >register/Bootstrap.php</a></i>
+                                                        <td><i><a href="#register-bootstrap" >register/Bootstrap.php</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
                                                         <td>Đây là file được load khi plugin được load vào hệ thống. chi tiết mục #3
@@ -155,7 +155,7 @@
                                                     <tr>
                                                         <td>6
                                                         </td>
-                                                        <td><i><a href="#" >register/Routing.php</a></i>
+                                                        <td><i><a href="#register-routing" >register/Routing.php</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
                                                         <td>Đây là file đăng ký các endpoint của plugin. chi tiết mục #3
@@ -164,7 +164,7 @@
                                                     <tr>
                                                         <td>7
                                                         </td>
-                                                        <td><i><a href="#" >controllers</a></i>
+                                                        <td><i><a href="#section-4" >controllers</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
                                                         <td>Folder chứa các class controller xử lý các request trên plugin.
@@ -173,7 +173,7 @@
                                                     <tr>
                                                         <td>8
                                                         </td>
-                                                        <td><i><a href="#" >models</a></i>
+                                                        <td><i><a href="#section-5" >models</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
                                                         <td>Folder chứa các class models xử lý nghiệp vụ của plugin
@@ -182,7 +182,7 @@
                                                     <tr>
                                                         <td>9
                                                         </td>
-                                                        <td><i><a href="#" >entities</a></i>
+                                                        <td><i><a href="#section-6" >entities</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
                                                         <td>Folder chứa các class Entity kết nối với cơ sở dữ liệu
@@ -191,7 +191,7 @@
                                                     <tr>
                                                         <td>10
                                                         </td>
-                                                        <td><i><a href="#" >viewmodels</a></i>
+                                                        <td><i><a href="#section-7" >viewmodels</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
                                                         <td>Folder chứa các class ViewModels là nơi định nghĩa dữ liệu được hiển thị trên giao diện 
@@ -200,7 +200,7 @@
                                                     <tr>
                                                         <td>11
                                                         </td>
-                                                        <td><i><a href="#" >views</a></i>
+                                                        <td><i><a href="#section-8" >views</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
                                                         <td>Folder chứa các giao diện của plugin
@@ -215,7 +215,7 @@
                                         <div class="content-section px-4">
                                             <div class="sup-content-section">
                                                 <p>Để cài đặt được plugin cần tối thiếu 2 file là plugin.php và register/Installer.php:</p>
-                                                <strong>File plugin.php example</strong>
+                                                <strong id="file_plugin">File plugin.php example</strong>
                                                 <pre>&lt;?php
     return [
         'tags' =&gt; [],
@@ -237,7 +237,7 @@
         'solutionB/pluginC'
     ]</pre>
     
-    <strong>Class register/Installer.php: </strong>
+    <strong id="register-install">Class register/Installer.php: </strong>
     <pre>&lt;?php
     namespace App\solutionA\pluginB\registers;
     
@@ -317,7 +317,7 @@
                                     <div id="section-3" class="col-12">
                                         <h4>3. Register</h4>
                                         <div class="content-section px-4">
-                                            <strong>File register/Routing.php</strong>
+                                            <strong id="register-routing">File register/Routing.php</strong>
                                             <p>Đây là file đăng ký các Endpoint của plugin. Example:</p>
 <pre>&lt;?php
 
@@ -353,7 +353,7 @@ class Routing
     <li>fnc: nơi quy định các function controller tương ứng với các method get, post, put, delete</li>
     <li>parameters: tương ứng các parameter trên url trên endpoint. Ví dụ /endpoint2/3 sẽ có param id bằng 3</li>
 </ul>
-<strong>File register/Dispatcher.php</strong>
+<strong id="register-dispatcher">File register/Dispatcher.php</strong>
 <p>Đây là file điều hướng khi endpoint của plugin được kích hoạt. File này thường được sử dụng khi cần xây dựng plugin xử lý tác vụ trên web thông qua các endpoint.</p>
 <pre>&lt;?php
 namespace App\solutionA\pluginB\registers;
@@ -396,7 +396,7 @@ class Dispatcher
 Ví dụ của 1 việc load 1 hook
 <pre>$app-&gt;plgLoad('permission', 'CheckSession');</pre>
 <p>Câu lệnh này sẽ gọi đến tất cả các function register/Permission::checkSession() trên toàn bộ plugin. Ta có thể mở rộng với việc tạo thêm các hook khác trong register và gọi chúng trên register/Dispatcher</p>
-<strong>File register/Bootstrap.php</strong>
+<strong id="register-bootstrap">File register/Bootstrap.php</strong>
 <p>Đây là file được chạy để nạp thêm các đối tượng vào hệ thống. Được chạy khi plugin load vào hệ thống.</p>
 <pre>&lt;?php
     namespace App\solutionA\pluginB\registers;
