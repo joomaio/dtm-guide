@@ -585,9 +585,72 @@ tương ứng với điều kiện id = 1
                                     </div>
                                     <div id="section-7" class="col-12">
                                         <h4>7. Viewmodel</h4>
+                                        <div class="content-section px-4">
+                                            <p>
+                                                Class ViewModels là nơi định nghĩa dữ liệu được hiển thị trên giao diện. Example class:
+                                            </p>
+<pre>&lt;?php
+namespace App\solutionA\pluginB\viewmodels;
+
+use SPT\Web\ViewModel;
+
+class Example extends ViewModel
+{
+    public static function register()
+    {
+        return [
+            'layout' =&gt; [
+                'layout1',
+                'frontend.layout2',
+                'frontend.layout3' =&gt; 'form',
+            ],
+            'widget'=&gt;[
+                'widget1',
+            ],
+        ];
+    }
+    
+    private function layout1()
+    {
+        return [
+            'title' =&gt; 'New layout 1'
+        ];
+    }
+
+    public function layout2()
+    {
+        return [
+            'title' =&gt; 'New layout 2'
+        ];
+    }
+
+    public function widget1()
+    {
+        return [
+            'title' =&gt; 'New Widget 1'
+        ];
+    }
+
+    public function form()
+    {
+        return [
+            'title' =&gt; 'New layout 3'
+        ];
+    }
+}
+</pre>
+<p>Đây là một ví dụ của một class ViewModel. Class ViewModel cần extend từ class SPT\Web\ViewModel.</p>
+<p>register(): đây là function đăng ký giữa view và các function trong class. Nó có 2 phần register là layout và widget, tương ứng với các giao diện được render.
+    Mỗi register layout sẽ tương ứng với mỗi function trong viewmodel, function sẽ return ra một mảng các giá trị để sử dụng trên view
+</p>
+<p>Trong ví dụ, class VM được đăng ký với layout > layout 1, khi layout này được render thì function layout1() sẽ được thực hiện.</p>
+                                        </div>
                                     </div>
                                     <div id="section-8" class="col-12">
                                         <h4>8. View</h4>
+                                        <div class="content-section px-4">
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
