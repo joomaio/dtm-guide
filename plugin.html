@@ -48,27 +48,27 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link scrollto" href="#section-4">
-                                            4. Dispatcher</a>
+                                            4. Controller</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link scrollto" href="#section-5">
-                                            5. Controller</a>
+                                            5. Model</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link scrollto" href="#section-6">
-                                            6. Model</a>
+                                            6. Entity</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link scrollto" href="#section-7">
-                                            7. Entity</a>
+                                            7. ViewModel</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link scrollto" href="#section-8">
-                                            8. Viewmodels</a>
+                                            8. Views</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link scrollto" href="#section-9">
-                                            9. Views</a>
+                                            9. Session</a>
                                     </li>
 
                                     <li class="nav-item section-title mt-3">
@@ -649,7 +649,46 @@ class Example extends ViewModel
                                     <div id="section-8" class="col-12">
                                         <h4>8. View</h4>
                                         <div class="content-section px-4">
-                                            
+                                            Đây là các file giao diện của plugin, nằm trong folder views. folder views sẽ có 2 folder views/layouts và views/widgets. 
+                                            <ul>
+                                                <li>views/layouts: chứa các giao diện được sử dụng trong plugin, các view này không sử render được từ plugin khác</li>
+                                                <li>views/widgets: chứa các giao diện được sử dụng trong plugin hoặc các plugin khác</li>
+                                            </ul>
+                                            <strong># Render layout views</strong>
+                                            Các views/layouts được render qua controller bằng việc chạy câu lệnh bên dưới trong các function controller.
+<pre>     
+    $this-&gt;app-&gt;set('layout', 'layout1');</pre>
+Các layout cũng được render việc sử dụng func render trong các layout. example: 
+<pre>     
+    $this-&gt;render({layout_path});</pre>
+{layout_path} tương ứng với path đến layout. ví dụ: {layout_path} = frontend.layout1 tương ứng việc render file views/layouts/frontend/layout1.php
+Để sử dụng các dữ liệu được định nghĩa trong các class ViewModel, sử dụng :
+<pre>     
+    $this-&gt;{key};</pre>
+Trong đó, {key} tương ứng với key của mảng trả ra của function viewmodel
+                                            <strong># Render widgets</strong>
+                                            Để render các widget trong view, sử dụng câu lệnh:
+<pre>     
+    $this-&gt;renderWidget('{plugin_name}:{widget_path}');</pre>  
+Trong đó:
+<ul>
+    <li>{plugin_name} : tên plugin chứa widget</li>
+    <li>{widget_path} : tương ứng với đường dẫn tới widget. Ví dụ {widget_path} = frontend.widget1 tương ứng với file views/widgets/frontend/widget1.php</li>
+</ul>            
+                                        </div>
+                                    </div>
+                                    <div id="section-9" class="col-12">
+                                        <h4>9. Session</h4>
+                                        <div class="content-section px-4">
+                                            <p>Để sử dụng section trong có thể sử dụng <strong>$this->session</strong>.</p>
+                                            <strong># Set session</strong>
+<pre>
+    $this-&gt;session->set('key', 'value');
+</pre>
+<strong># Get session</strong>
+<pre>
+    $this-&gt;session->get('key', 'default_value');
+</pre>
                                         </div>
                                     </div>
                                 </div>
