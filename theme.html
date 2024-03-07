@@ -41,6 +41,13 @@
                                             </span>
                                             Solution</a>
                                     </li>
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./theme.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Theme</a>
+                                    </li>
                                     <li class="nav-item">
                                         <a class="nav-link scrollto" href="#section-1">
                                             1.Cấu trúc </a>
@@ -48,13 +55,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link scrollto" href="#section-2">
                                             2. Install / Uninstall</a>
-                                    </li>
-                                    <li class="nav-item section-title mt-3">
-                                        <a class="nav-link" href="./theme.html">
-                                            <span class="theme-icon-holder me-2">
-                                                <i class="fas fa-lightbulb"></i>
-                                            </span>
-                                            Theme</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -64,7 +64,7 @@
                                 <article class="docs-article pb-0" id="section-1">
                                     <header class="docs-header">
                                         <h2 class=" text-center mb-0">
-                                            Phát triển Solution
+                                            Phát triển Theme
                                         </h2>
                                     </header>
                                 </article>
@@ -81,19 +81,37 @@
                                                     <tr>
                                                         <td>1
                                                         </td>
-                                                        <td><i><a href="#" >solution.php</a></i>
+                                                        <td><i><a href="#" >theme.json</a></i>
                                                         </td>
                                                         <td>Bắt buộc</td>
-                                                        <td>Đây là file php khai báo thông tin của solution, sử dụng cho việc cài đặt và quản lý solution
+                                                        <td>Đây là file khai báo thông tin của theme, sử dụng cho việc cài đặt và quản lý theme
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td>2
                                                         </td>
-                                                        <td><i><a href="#" >plugin</a></i>
+                                                        <td><i><a href="#" >index.php</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Page mặc định của theme
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3
+                                                        </td>
+                                                        <td><i><a href="#" >_assets.php</a></i>
                                                         </td>
                                                         <td>Tùy chọn</td>
-                                                        <td>Đây là folder plugin nằm trong solution. <a href="./plugin.html">Hướng dẫn phát triển plugin</a>
+                                                        <td>Đây là file đăng ký các key của file assets sử dụng cho theme.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4
+                                                        </td>
+                                                        <td><i><a href="#" >assets</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các file assets của theme
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -104,29 +122,24 @@
                                         <h4>2. Install / Uninstall</h4>
                                         <div class="content-section px-4">
                                             <div class="sup-content-section">
-                                                <p>Để cài đặt được solution cần tối thiếu 1 file solution.php:</p>
-                                                <strong>File solution.php example</strong>
-                                                <pre>&lt;?php
-    return [
-        'tags' =&gt; [],
-        'type' =&gt; 'solution',
-        'solution' =&gt; 'new_solution',
-        'folder_name' =&gt; 'new_solution',
-        'name' =&gt; 'New Solution',
-        'dependencies' =&gt; []
-    ];</pre>
+                                                <p>Để cài đặt được theme cần tối thiếu 2 file theme.json và index.php:</p>
+                                                <strong>File theme.json example</strong>
+<pre>{
+    "title": "New Theme",
+    "folder" : "new_theme",
+    "description" : "This is new theme",
+    "image": "assets/new_theme/images/new_theme.png",
+    "dependencies" : []
+}</pre>
     <p>Trong đó:</p>
-    <p>- tags: Các thẻ của solution</p>
-    <p>- type: solution, thông tin này không thay đổi</p>
-    <p>- solution: new_solution, thông tin bắt buộc</p>
-    <p>- folder_name: là tên folder của solution</p>
-    <p>- name: tên solution</p>
-    <p>- dependencies: Chứa thông tin danh sách các plugin hoặc solution cần cài đặt trước khi cài đặt solution. Ví dụ solution phụ thuộc </p>
-    <pre>'dependencies' =&gt; [
-        'solutionA',
-        'solutionB/pluginC'
-    ]</pre>
-    <p>Việc Install / Uninstall solution sẽ dựa trên thông tin của file solution.php để thực hiện.
+    <p>- title: Title của theme</p>
+    <p>- folder: tên folder của theme</p>
+    <p>- description: mô tả của theme</p>
+    <p>- image: link ảnh thumnail của theme</p>
+    <p>- dependencies: các solution và plugin phụ thuộc</p>
+    <p>Việc Install / Uninstall solution sẽ dựa trên thông tin của file theme.json để thực hiện.</p>
+        <strong>File index.php </strong>
+        <p>Đây là file page mặc định của theme, page được xác định bằng $this->app->set('page', 'page_name')</p>
                                     </div>
                                 </div>
                             </div>
