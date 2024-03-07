@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Theme Development</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/css/theme.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/plugins/simplelightbox/simple-lightbox.min.css">
+    <script src="./assets/js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
+    <div class="wrapper">
+        <div class="main">
+            <main class="content p-0">
+                <div class="docs-page pt-0">
+                    <div class="docs-wrapper">
+                        <div id="docs-sidebar" class="docs-sidebar no-top">
+                            <nav id="docs-nav" class="docs-nav navbar">
+                                <ul class="section-items list-unstyled nav flex-column pb-3">
+                                    <li class="nav-item section-title">
+                                        <a class="nav-link active" href="./index.html">
+                                            <span class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i>
+                                            </span>Tài liệu cho phát triển
+                                        </a>
+                                    </li>
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./plugin.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Plugin</a>
+                                    </li>
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./solution.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Solution</a>
+                                    </li>
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./theme.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Theme</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-1">
+                                            1.Cấu trúc </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-2">
+                                            2. Install / Uninstall</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-3">
+                                            3. Register Assets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-4">
+                                            4. Page</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-5">
+                                            5. Override view</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="docs-content">
+                            <div class="container">
+                                <article class="docs-article pb-0" id="section-1">
+                                    <header class="docs-header">
+                                        <h2 class=" text-center mb-0">
+                                            Phát triển Theme
+                                        </h2>
+                                    </header>
+                                </article>
+                            </div>
+                            <div class="container mt-3">
+                                <div class="row">
+                                    <div id="section-1" class="col-12">
+                                        <h4>1. Cấu trúc</h4>
+                                        <div class="content-section px-4">
+                                            <p>Cấu trúc folder của một solution bao gồm:
+                                            </p>
+                                            <table class="table" border="1">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1
+                                                        </td>
+                                                        <td><i><a href="#" >theme.json</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Đây là file khai báo thông tin của theme, sử dụng cho việc cài đặt và quản lý theme
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2
+                                                        </td>
+                                                        <td><i><a href="#" >index.php</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Page mặc định của theme
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3
+                                                        </td>
+                                                        <td><i><a href="#" >_assets.php</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Đây là file đăng ký các key của file assets sử dụng cho theme.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4
+                                                        </td>
+                                                        <td><i><a href="#" >assets</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các file assets của theme
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="section-2" class="col-12">
+                                        <h4>2. Install / Uninstall</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Để cài đặt được theme cần tối thiếu 2 file theme.json và index.php:</p>
+                                                <strong>File theme.json example</strong>
+<pre>{
+    "title": "New Theme",
+    "folder" : "new_theme",
+    "description" : "This is new theme",
+    "image": "assets/new_theme/images/new_theme.png",
+    "dependencies" : []
+}</pre>
+    <p>Trong đó:</p>
+    <p>- title: Title của theme</p>
+    <p>- folder: tên folder của theme</p>
+    <p>- description: mô tả của theme</p>
+    <p>- image: link ảnh thumnail của theme</p>
+    <p>- dependencies: các solution và plugin phụ thuộc</p>
+    <p>Việc Install / Uninstall solution sẽ dựa trên thông tin của file theme.json để thực hiện.</p>
+        <strong>File index.php </strong>
+        <p>Đây là file page mặc định của theme, page được xác định bằng $this->app->set('page', 'page_name')</p>
+                                    </div>
+                                    <div id="section-3" class="col-12">
+                                        <h4>3. Register Assets</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Để đăng ký các file asset trong theme sử dụng file _asset.php.</p>
+                                                <strong>File _assets.php example</strong>
+<pre>&lt;?php defined( 'APP_PATH' ) or die('');
+
+    return [
+        'new_theme-css' =&gt; [
+            ['__domain__/assets/new_theme/css/style.css', '' , 'new_theme_style']
+        ],
+    
+    ];</pre>
+    <p>Trong đó:</p>
+    <p>- key của mảng: Đây là key asset file</p>
+    <p>- value của mảng: Mảng chứa thông tin của file asset lần lượt bao gồm: link tới file asset, depenendcies của file asset, unique name của file asset(để tránh trường hợp file bị render nhiều lần)</p>
+    <p>- __domain__: đây là shortcode để tượng trưng cho site url</p>
+                                    </div>
+                                    <div id="section-4" class="col-12">
+                                        <h4>4. Page</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Các file .php trong theme sẽ tương ứng với các page. Page mặc định tương ứng với file.</p>
+                                                <strong>File page.php example</strong>
+<pre>&lt;?php defined('APP_PATH') or die('');
+    $this-&gt;theme-&gt;prepareAssets([
+        'new_theme',
+    ]);
+    $content = $this-&gt;render($this-&gt;mainLayout);
+    ?&gt;
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang='en'&gt;
+    
+    &lt;head&gt;
+        &lt;meta charset='utf-8'&gt;
+        &lt;meta name='viewport' content='width=device-width, initial-scale=1'&gt;
+        &lt;title&gt;Title Page&lt;/title&gt;
+    
+        &lt;?php $this-&gt;theme-&gt;echo('css', $this-&gt;url()) ?&gt;
+        &lt;?php $this-&gt;theme-&gt;echo('topJs', $this-&gt;url()) ?&gt;
+        &lt;?php $this-&gt;theme-&gt;echo('inlineCss', $this-&gt;url()) ?&gt;
+    &lt;/head&gt;
+    
+    &lt;body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default"&gt;
+        &lt;?php echo $this-&gt;renderWidget('core::backend.header'); ?&gt;
+        &lt;div class="wrapper"&gt;
+            &lt;div class="main"&gt;
+                &lt;main class="content p-0"&gt;
+                    &lt;?php echo $content; ?&gt;
+                &lt;/main&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;?php $this-&gt;theme-&gt;echo('js', $this-&gt;url()) ?&gt;
+        &lt;?php $this-&gt;theme-&gt;echo('inlineJs', $this-&gt;url()) ?&gt;
+    &lt;/body&gt;
+    
+    &lt;/html&gt;</pre>
+    <p>Các file page sẽ quy định cấu trúc của page, và style của page. Trong đó: </p>
+    <ul>
+        <li>$this->render(): Dùng để render view</li>
+        <li>$this->renderWidget(): Dùng để render widget</li>
+        <li>$this->mainLayout: chứa thông tin của layout chính</li>
+        <li>$this->url(): url của site</li>
+        <li>$this->theme->echo({key}, {link}): function dùng hiển thị ra các file asset, với {key} bao gồm css, js, inlineCss, topJs, inlineJs </li>
+    </ul>
+                                    </div>
+                                    <div id="section-5" class="col-12">
+                                        <h4>5. Override view</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Để override các view của plugin thì trong theme sẽ tạo các file view tương ứng</p>
+                                                <p>Quy tắc tạo file override: </p>
+                                                <ul>
+                                                    <li>Các file override được tạo trong 2 folder _layouts và _widgets</li>
+                                                    <li>_layouts folder chứa các file override của layout plugin</li>
+                                                    <li>_widgets folder chứa các file override của widget plugin</li>
+                                                    <li>Ví dụ view của plugin a: pluginA/views/layouts/frontend/layout1.php, để override cần tạo 1 file trong theme: new_theme/_layouts/pluginA/frontend/layout1.php
+                                                        các file widget cũng tương tự như layout.
+                                                    </li>
+                                                    <li>Các dữ liệu sử dụng được trên layout của plugin cũng sử dụng được trên layout của theme
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="./assets/specs/plugins/popper.min.js"></script>
+    <script src="./assets/specs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/specs/plugins/smoothscroll.min.js"></script>
+    <script src="./assets/specs/plugins/simplelightbox/simple-lightbox.min.js"></script>
+    <script src="./assets/specs/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+    <script src="./assets/specs/js/docs.js"></script>
+</body>
+
+</html>

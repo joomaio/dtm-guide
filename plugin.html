@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plugin Development</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/css/style.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/css/theme.css">
+    <link rel="stylesheet" type="text/css" href="./assets/specs/plugins/simplelightbox/simple-lightbox.min.css">
+    <script src="./assets/js/jquery-3.6.0.min.js"></script>
+</head>
+
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-layout="default">
+    <div class="wrapper">
+        <div class="main">
+            <main class="content p-0">
+                <div class="docs-page pt-0">
+                    <div class="docs-wrapper">
+                        <div id="docs-sidebar" class="docs-sidebar no-top">
+                            <nav id="docs-nav" class="docs-nav navbar">
+                                <ul class="section-items list-unstyled nav flex-column pb-3">
+                                    <li class="nav-item section-title">
+                                        <a class="nav-link active" href="./index.html">
+                                            <span class="theme-icon-holder me-2"><i class="fas fa-map-signs"></i>
+                                            </span>Tài liệu cho phát triển
+                                        </a>
+                                    </li>
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./plugin.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Plugin</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-1">
+                                            1.Cấu trúc </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-2">
+                                            2. Install / Uninstall</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-3">
+                                            3. Register</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-4">
+                                            4. Controller</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-5">
+                                            5. Model</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-6">
+                                            6. Entity</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-7">
+                                            7. ViewModel</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-8">
+                                            8. Views</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link scrollto" href="#section-9">
+                                            9. Session</a>
+                                    </li>
+
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./solution.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Solution</a>
+                                    </li>
+                                    <li class="nav-item section-title mt-3">
+                                        <a class="nav-link" href="./theme.html">
+                                            <span class="theme-icon-holder me-2">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </span>
+                                            Theme</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="docs-content">
+                            <div class="container">
+                                <article class="docs-article pb-0" id="section-1">
+                                    <header class="docs-header">
+                                        <h2 class=" text-center mb-0">
+                                            Phát triển Plugin
+                                        </h2>
+                                    </header>
+                                </article>
+                            </div>
+                            <div class="container mt-3">
+                                <div class="row">
+                                    <div id="section-1" class="col-12">
+                                        <h4>1. Cấu trúc</h4>
+                                        <div class="content-section px-4">
+                                            <p>Cấu trúc folder của một plugin bao gồm:
+                                            </p>
+                                            <table class="table" border="1">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1
+                                                        </td>
+                                                        <td><i><a href="#file_plugin" >plugin.php</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Đây là file php khai báo thông tin của plugin, sử dụng cho việc cài đặt và quản lý plugin
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2
+                                                        </td>
+                                                        <td><i><a href="#section-3" >register</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Đây là folder chứa các đăng ký của plugin với hệ thống
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3
+                                                        </td>
+                                                        <td><i><a href="#register-install" >register/Installer.php</a></i>
+                                                        </td>
+                                                        <td>Bắt buộc</td>
+                                                        <td>Đây là file đăng ký thông tin của plugin, nơi plugin trigger các sự kiện khi install / uninstall plugin.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4
+                                                        </td>
+                                                        <td><i><a href="#register-dispatcher" >register/Dispatcher.php</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Đây là file đăng ký file xử lý điều phối của plugin khi có yêu cầu xử lý tới plugin. Chi tiết mục #3
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>5
+                                                        </td>
+                                                        <td><i><a href="#register-bootstrap" >register/Bootstrap.php</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Đây là file được load khi plugin được load vào hệ thống. chi tiết mục #3
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>6
+                                                        </td>
+                                                        <td><i><a href="#register-routing" >register/Routing.php</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Đây là file đăng ký các endpoint của plugin. chi tiết mục #3
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>7
+                                                        </td>
+                                                        <td><i><a href="#section-4" >controllers</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các class controller xử lý các request trên plugin.
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>8
+                                                        </td>
+                                                        <td><i><a href="#section-5" >models</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các class models xử lý nghiệp vụ của plugin
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>9
+                                                        </td>
+                                                        <td><i><a href="#section-6" >entities</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các class Entity kết nối với cơ sở dữ liệu
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>10
+                                                        </td>
+                                                        <td><i><a href="#section-7" >viewmodels</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các class ViewModels là nơi định nghĩa dữ liệu được hiển thị trên giao diện 
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>11
+                                                        </td>
+                                                        <td><i><a href="#section-8" >views</a></i>
+                                                        </td>
+                                                        <td>Tùy chọn</td>
+                                                        <td>Folder chứa các giao diện của plugin
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="section-2" class="col-12">
+                                        <h4>2. Install / Uninstall</h4>
+                                        <div class="content-section px-4">
+                                            <div class="sup-content-section">
+                                                <p>Để cài đặt được plugin cần tối thiếu 2 file là plugin.php và register/Installer.php:</p>
+                                                <strong id="file_plugin">File plugin.php example</strong>
+                                                <pre>&lt;?php
+    return [
+        'tags' =&gt; [],
+        'type' =&gt; 'plugin',
+        'solution' =&gt; 'new_solution',
+        'folder_name' =&gt; 'new_plugin',
+        'name' =&gt; 'New Plugin',
+        'dependencies' =&gt; []
+    ];</pre>
+    <p>Trong đó:</p>
+    <p>- tags: Các thẻ của plugin</p>
+    <p>- type: plugin, thông tin này không thay đổi</p>
+    <p>- solution: new_solution, thông tin bắt buộc, mỗi plugin sẽ luôn này trong một solution</p>
+    <p>- folder_name: là tên folder của plugin</p>
+    <p>- name: tên plugin</p>
+    <p>- dependencies: Chứa thông tin danh sách các plugin hoặc solution cần cài đặt trước khi cài đặt plugin. Ví dụ plugin phụ thuộc </p>
+    <pre>'dependencies' =&gt; [
+        'solutionA',
+        'solutionB/pluginC'
+    ]</pre>
+    
+    <strong id="register-install">Class register/Installer.php: </strong>
+    <pre>&lt;?php
+    namespace App\solutionA\pluginB\registers;
+    
+    use SPT\Application\IApp;
+    
+    class Installer
+    {
+        public static function info()
+        {
+            return [
+                'tags' =&gt; [],
+                'type' =&gt; 'plugin',
+                'solution' =&gt; 'solutionA',
+                'folder_name' =&gt; 'pluginB',
+                'name' =&gt; 'Plugin B',
+                'dependencies' =&gt; []
+            ];
+        }
+        
+        public static function name()
+        {
+            return 'Plugin B';
+        }
+    
+        public static function version()
+        {
+            return '0.0.1';
+        }
+    
+        public static function assets()
+        {
+            return [
+                'plugin_assets' =&gt; 'assets/plugin_assets',
+            ];
+        }
+    
+        public static function install( IApp )
+        {
+            // Run sth to install
+            return true;
+        }
+        public static function uninstall( IApp )
+        {
+            // Run sth to uninstall
+            return true;
+        }
+        public static function active( IApp )
+        {
+            // run sth to prepare the install
+        }
+        public static function deactive( IApp )
+        {
+            // run sth to uninstall
+        }
+    }</pre>
+    <strong>Các lưu ý khi tạo installer plugin:</strong>
+    <ul>
+        <li>
+            Cách đặt namespace: namespace có cấu trúc App\{solution}\{plugin}\register. trong đó, {solution} là name folder của solution chứa plugin, {plugin} name folder của plugin.
+            Quy tắc đặt namespace này cũng sẽ áp dụng với tất cả class của plugin.
+        </li>
+        <li>
+            function info() chứa thông tin của plugin
+        </li>
+        <li>
+            function assets() chứa thông tin danh sách các file assets của plugin. Trong đó: "plugin_assets" là tên folder chứa các file asset của plugin và cũng là nơi lưu trữ trên folder asset của hệt thống.
+            Việc này khá quan trọng khi muốn thêm các file style / js dùng cho giao diện plugin.
+        </li>
+        <li>
+            2 function install() và uninstall() là nơi thực hiện thêm các công việc khi install/uninstall plugin
+        </li>
+    </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="section-3" class="col-12">
+                                        <h4>3. Register</h4>
+                                        <div class="content-section px-4">
+                                            <strong id="register-routing">File register/Routing.php</strong>
+                                            <p>Đây là file đăng ký các Endpoint của plugin. Example:</p>
+<pre>&lt;?php
+
+namespace App\solutionA\pluginB\registers;
+
+use SPT\Application\IApp;
+
+class Routing
+{
+    public static function registerEndpoints()
+    {
+        return [
+            'endpont1' =&gt; [
+                'fnc' =&gt; [
+                    'get' =&gt; 'pluginB.controller_name.funcA',
+                    'post' =&gt; 'pluginB.controller_name.funcB',
+                ]
+            ],
+            'endpont2' =&gt; [
+                'fnc' =&gt; [
+                    'get' =&gt; 'pluginB.controller_name.funcC',
+                    'post' =&gt; 'pluginB.controller_name.funcD',
+                ],
+                'parameters' =&gt; ['id'],
+            ],
+        ];
+    }
+}
+</pre>
+<p>Ví dụ trên đăng ký tương ứng với 2 endpoint: endpoint1 và endpoint2/{id}</p>
+<p>Trong đó:</p>
+<ul>
+    <li>fnc: nơi quy định các function controller tương ứng với các method get, post, put, delete</li>
+    <li>parameters: tương ứng các parameter trên url trên endpoint. Ví dụ /endpoint2/3 sẽ có param id bằng 3</li>
+</ul>
+<strong id="register-dispatcher">File register/Dispatcher.php</strong>
+<p>Đây là file điều hướng khi endpoint của plugin được kích hoạt. File này thường được sử dụng khi cần xây dựng plugin xử lý tác vụ trên web thông qua các endpoint.</p>
+<pre>&lt;?php
+namespace App\solutionA\pluginB\registers;
+
+use SPT\Application\IApp;
+use SPT\Response;
+
+class Dispatcher
+{
+    public static function dispatch(IApp $app)
+    {   
+        // Check Permission
+        $app-&gt;plgLoad('permission', 'CheckSession');
+
+        $cName = $app-&gt;get('controller');
+        $fName = $app-&gt;get('function');
+
+        $app-&gt;set('theme', $app-&gt;cf('adminTheme'));
+
+        $controller = 'App\solutionA\pluginB\controllers\'. $cName;
+        if(!class_exists($controller))
+        {
+            $app-&gt;raiseError('Invalid controller '. $cName);
+        }
+
+        $controller = new $controller($app-&gt;getContainer());
+        $controller-&gt;{$fName}();
+        
+        
+
+        $fName = 'to'. ucfirst($app-&gt;get('format', 'html'));
+
+        $app-&gt;finalize(
+            $controller-&gt;{$fName}()
+        );
+    }
+}
+</pre>
+<p>File này có nhiệm vụ kiểm tra controller và function đã được đăng ký trong Routing và thực hiện gọi function đó ra. Đây cũng là nơi có thể tạo thêm các hook hoặc check permission khi các endpoint được gọi. Ví dụ như dòng "$app->PlgLoad('perrmison', 'checkSession');" nó có nhiệm vụ kiểm tra permission user được lưu trên session.</p>
+Ví dụ của 1 việc load 1 hook
+<pre>$app-&gt;plgLoad('permission', 'CheckSession');</pre>
+<p>Câu lệnh này sẽ gọi đến tất cả các function register/Permission::checkSession() trên toàn bộ plugin. Ta có thể mở rộng với việc tạo thêm các hook khác trong register và gọi chúng trên register/Dispatcher</p>
+<strong id="register-bootstrap">File register/Bootstrap.php</strong>
+<p>Đây là file được chạy để nạp thêm các đối tượng vào hệ thống. Được chạy khi plugin load vào hệ thống.</p>
+<pre>&lt;?php
+    namespace App\solutionA\pluginB\registers;
+    
+    use SPT\Application\IApp;
+    use SPT\File;
+    
+    class Bootstrap
+    {
+        public static function initialize( IApp $app)
+        {
+            $container = $app-&gt;getContainer();
+            if (!$container-&gt;exists('file')) 
+            {
+                $container-&gt;set('file', new File());
+            }
+        }
+    }
+    </pre>
+<p>Ví dụ trên thực hiện việc thêm đối tượng "file" vào hệ thống, dùng để xử lý các bài toán liên quan đến file / folder.</p>
+                                        </div>
+                                    </div>
+                                    <div id="section-4" class="col-12">
+                                        <h4>4. Controller</h4>
+                                        <div class="content-section px-4">
+                                            <p>Đây là các class xử lý các action khi các endpoint plugin được kích hoạt. Example class controller</p>
+<pre>&lt;?php
+    namespace App\solutionA\pluginB\controllers;
+    
+    use SPT\Response;
+    use SPT\Web\ControllerMVVM;
+    
+    class example extends ControllerMVVM
+    {
+        public function view()
+        {
+            $this-&gt;app-&gt;set('layout', 'form');
+            $this-&gt;app-&gt;set('page', 'two-column');
+            $this-&gt;app-&gt;set('format', 'html');
+            return ;
+        }
+    }
+    </pre>
+<p>Trên là 1 ví dụ việc tạo 1 class controller.</p>
+<strong>Hiển thị giao diện với controller: </strong>
+<p>Để hiển thị được giao diện cần set layout và page</p>
+<pre>
+    $this-&gt;app-&gt;set('layout', 'form');
+    $this-&gt;app-&gt;set('page', 'two-column');
+    $this-&gt;app-&gt;set('format', 'html');
+</pre>
+<p>Trong đó, layout tương ứng với file trong folder views. Tương ứng với ví dụ, layout sẽ hiển thị tương ứng file views/layouts/form.php</p>
+<p>Page tương ứng với page của theme, mặc định page là index</p>
+<p>Format quy định định dạng của content, trong ví dụ thì là html. Có các dạng format sau: html, json</p>
+<strong>Lấy các data từ request:</strong>
+<pre>
+    $this-&gt;request-&gt;{method_type}&gt;get('field_name', 'default_value','type_value');
+</pre>
+
+<p>Trong đó, {method_type} là kiểu của request, ví dụ {method_type} = post sẽ lấy request từ $_POST. Có các dạng method support: post, get, file, server. {type_value} định dạng kiểu của giá trị trả ra, có các kiểu: string, array, int</p>
+<strong>Redirect trong controller:</strong>
+<p>Example redirect tới 1 link trong controller</p>
+<pre>
+    $this-&gt;app-&gt;redirect('link');
+</pre>
+
+                                        </div>
+                                    </div>
+                                    <div id="section-5" class="col-12">
+                                        <h4>5. Model</h4>
+                                        <div class="content-section px-4">
+                                            <p>Class model là nơi xử lý các bài toán nghiệp vụ, logic của plugin. Example class:</p>
+<pre>&lt;?php
+
+namespace App\solutionA\pluginB\models;
+
+use SPT\Container\Client as Base;
+
+class ExampleModel extends Base
+{ 
+    // Write your code here
+    use \SPT\Traits\ErrorString;
+
+}
+</pre>
+<p>Ví dụ trên là example của một class Model. Để xử dụng được model sử dụng câu lệnh:</p>
+<pre>
+    $this-&gt;{Model}-&gt;func();
+</pre>
+<p>Trong đó {Model} là tên class Model.</p>
+                                        </div>
+                                    </div>
+                                    <div id="section-6" class="col-12">
+                                        <h4>6. Entity</h4>
+                                        <div class="content-section px-4">
+                                            <p>Class Entity dùng để xử lý kết nối với cơ sở dữ liệu của hệ thống. Example Class: </p>
+<pre>&lt;?php
+namespace App\solutionA\pluginB\entities;
+
+use SPT\Storage\DB\Entity;
+
+class ExampleEntity extends Entity
+{
+    protected $table = '#__example';
+    protected $pk = 'id';
+
+    public function getFields()
+    {
+        return [
+                'id' =&gt; [
+                    'type' =&gt; 'int',
+                    'pk' =&gt; 1,
+                    'option' =&gt; 'unsigned',
+                    'extra' =&gt; 'auto_increment',
+                ],
+                'new_field' =&gt; [
+                    'type' =&gt; 'int',
+                ],
+        ];
+    }
+}</pre>
+
+<p>Các class Entity được extends từ class "SPT\Storage\DB\Entity". Nó có thể sử dụng được trong các class Model, Controller và ViewModel. Trong đó:</p>
+<ul>
+    <li>
+        $table: là tên bảng trong cơ sở dữ liệu
+    </li>
+    <li>
+        $pk: là tên trường khóa chính trong bảng
+    </li>
+    <li>
+        getFields(): trả ra danh sách các trường trong bảng, với định dạng 1 array với key tương ứng với tên trường,
+        'type' là kiểu của trường, 'pk' là khóa chính, = 1 nếu nó là khóa chính.
+    </li>
+</ul>
+<strong># Câu lệnh select</strong>
+<pre>
+    $this-&gt;ExampleEntity-&gt;list( $start, $limit, $where, $sort, $select);
+</pre>
+<p>Trong đó:</p>
+<ul>
+    <li>$start: vị trí bắt đầu, có kiểu int</li>
+    <li>$limit: giới hạn số lượng, có kiểu int, nếu $limit = 0 câu lệnh select sẽ lấy tất cả các record</li>
+    <li>$where: các điều kiện của select. Có dạng 1 array, example: 
+<pre>
+    $where = ['id' =&gt; 1];
+</pre>
+tương ứng với điều kiện id = 1
+    </li>
+    <li>$sort: sắp xếp</li>
+    <li>$select: các trường được select</li>
+</ul>
+<p>Để lấy được lượng tất cả record theo điều kiện $where, ta sử dụng câu lệnh này ngay sau câu lệnh list: </p>
+<pre>
+    $this-&gt;ExampleEntity-&gt;getListTotal();
+</pre>
+<p>Câu lệnh sẽ lấy tổng số record của câu lệnh list() trước đó.</p>
+<strong># Tìm 1 record theo primary key</strong>
+<pre>
+    $find =  $this-&gt;ExampleEntity-&gt;findByPK(3);</pre>
+<p>Câu lệnh này sẽ tìm kiếm record có giá trị primary key = 3, trả ra false nếu không tồn tại</p>
+<strong># Tìm 1 record theo điều kiện</strong>
+<pre>
+    $find =  $this-&gt;ExampleEntity-&gt;findOne(['id' => 1]);</pre>
+<p>Câu lệnh này sẽ tìm kiếm record có id  = 1, trả ra false nếu không tồn tại</p>
+<strong># Thêm mới</strong>
+<pre>
+    $newId =  $this-&gt;ExampleEntity-&gt;add([
+        'title' =&gt; 'test',
+        'description' =&gt; 'This is test'
+    ]);</pre>
+<p>Hàm add() trả ra giá trị của primary_key vừa tạo nếu thành công, trả ra false nếu thất bại</p>
+<strong># Cập nhật</strong>
+<pre>
+    $try =  $this-&gt;ExampleEntity-&gt;update([
+        'id' =&gt; 3,
+        'title' =&gt; 'test',
+        'description' =&gt; 'This is test'
+    ]);</pre>
+<p>Hàm update() trả ra giá trị true nếu thành công và false nếu thất bại. Khi sử dụng hàm update, mảng truyền vào bắt buộc phải chứa trường primary key để xác định recored cần update</p>
+<strong># Xóa</strong>
+<pre>
+    $try =  $this-&gt;ExampleEntity-&gt;remove(3);</pre>
+<p>Hàm remove() trả ra giá trị true nếu thành công và false nếu thất bại. giá trị truyền vào là id của record</p>
+                                        </div>
+                                    </div>
+                                    <div id="section-7" class="col-12">
+                                        <h4>7. Viewmodel</h4>
+                                        <div class="content-section px-4">
+                                            <p>
+                                                Class ViewModels là nơi định nghĩa dữ liệu được hiển thị trên giao diện. Example class:
+                                            </p>
+<pre>&lt;?php
+namespace App\solutionA\pluginB\viewmodels;
+
+use SPT\Web\ViewModel;
+
+class Example extends ViewModel
+{
+    public static function register()
+    {
+        return [
+            'layout' =&gt; [
+                'layout1',
+                'frontend.layout2',
+                'frontend.layout3' =&gt; 'form',
+            ],
+            'widget'=&gt;[
+                'widget1',
+            ],
+        ];
+    }
+    
+    private function layout1()
+    {
+        return [
+            'title' =&gt; 'New layout 1'
+        ];
+    }
+
+    public function layout2()
+    {
+        return [
+            'title' =&gt; 'New layout 2'
+        ];
+    }
+
+    public function widget1()
+    {
+        return [
+            'title' =&gt; 'New Widget 1'
+        ];
+    }
+
+    public function form()
+    {
+        return [
+            'title' =&gt; 'New layout 3'
+        ];
+    }
+}
+</pre>
+<p>Đây là một ví dụ của một class ViewModel. Class ViewModel cần extend từ class SPT\Web\ViewModel.</p>
+<p>register(): đây là function đăng ký giữa view và các function trong class. Nó có 2 phần register là layout và widget, tương ứng với các giao diện được render.
+    Mỗi register layout sẽ tương ứng với mỗi function trong viewmodel, function sẽ return ra một mảng các giá trị để sử dụng trên view
+</p>
+<p>Trong ví dụ, class VM được đăng ký với layout > layout 1, khi layout này được render thì function layout1() sẽ được thực hiện.</p>
+                                        </div>
+                                    </div>
+                                    <div id="section-8" class="col-12">
+                                        <h4>8. View</h4>
+                                        <div class="content-section px-4">
+                                            Đây là các file giao diện của plugin, nằm trong folder views. folder views sẽ có 2 folder views/layouts và views/widgets. 
+                                            <ul>
+                                                <li>views/layouts: chứa các giao diện được sử dụng trong plugin, các view này không sử render được từ plugin khác</li>
+                                                <li>views/widgets: chứa các giao diện được sử dụng trong plugin hoặc các plugin khác</li>
+                                            </ul>
+                                            <strong># Render layout views</strong>
+                                            Các views/layouts được render qua controller bằng việc chạy câu lệnh bên dưới trong các function controller.
+<pre>     
+    $this-&gt;app-&gt;set('layout', 'layout1');</pre>
+Các layout cũng được render việc sử dụng func render trong các layout. example: 
+<pre>     
+    $this-&gt;render({layout_path});</pre>
+{layout_path} tương ứng với path đến layout. ví dụ: {layout_path} = frontend.layout1 tương ứng việc render file views/layouts/frontend/layout1.php
+Để sử dụng các dữ liệu được định nghĩa trong các class ViewModel, sử dụng :
+<pre>     
+    $this-&gt;{key};</pre>
+Trong đó, {key} tương ứng với key của mảng trả ra của function viewmodel
+                                            <strong># Render widgets</strong>
+                                            Để render các widget trong view, sử dụng câu lệnh:
+<pre>     
+    $this-&gt;renderWidget('{plugin_name}:{widget_path}');</pre>  
+Trong đó:
+<ul>
+    <li>{plugin_name} : tên plugin chứa widget</li>
+    <li>{widget_path} : tương ứng với đường dẫn tới widget. Ví dụ {widget_path} = frontend.widget1 tương ứng với file views/widgets/frontend/widget1.php</li>
+</ul>            
+                                        </div>
+                                    </div>
+                                    <div id="section-9" class="col-12">
+                                        <h4>9. Session</h4>
+                                        <div class="content-section px-4">
+                                            <p>Để sử dụng section trong có thể sử dụng <strong>$this->session</strong>.</p>
+                                            <strong># Set session</strong>
+<pre>
+    $this-&gt;session->set('key', 'value');
+</pre>
+<strong># Get session</strong>
+<pre>
+    $this-&gt;session->get('key', 'default_value');
+</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="./assets/specs/plugins/popper.min.js"></script>
+    <script src="./assets/specs/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./assets/specs/plugins/smoothscroll.min.js"></script>
+    <script src="./assets/specs/plugins/simplelightbox/simple-lightbox.min.js"></script>
+    <script src="./assets/specs/plugins/gumshoe/gumshoe.polyfills.min.js"></script>
+    <script src="./assets/specs/js/docs.js"></script>
+</body>
+
+</html>
